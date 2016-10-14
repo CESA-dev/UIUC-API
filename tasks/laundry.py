@@ -39,21 +39,21 @@ def laundry_update():
     somelist = []
     i = 0
     t = time.time()
-    while(i < length):
+    while(i < length):                              
         temp = {}
         temp['machine'] = machine[i]
-        temp['name'] = name[i]
+        temp['id'] = id_str[i]
         temp['networked'] = network[i]
         temp['timestamp'] = t
         somelist.append(json.dumps(temp))
         i = i + 1
         
     i = 0
-    print id_str[i]
-    print somelist[i]
-    while(i < length):
+    print name[i]
+    print somelist[i]                          
+    while(i < length):                              #set name as key
         
-        r.set(id_str[i], somelist[i])
+        r.set(name[i], somelist[i])
         i = i + 1
 
 
