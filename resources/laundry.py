@@ -14,6 +14,7 @@ class Laundry(Resource):
             output = str(e)
         return output
 
+#This does not really work, because id is changed randomly
 class LaundryID(Resource):
     def get(self, id):
         r = redis.StrictRedis(host='localhost', port=6379, db=0)
@@ -24,3 +25,7 @@ class LaundryID(Resource):
         except Exception as e:
             output = str(e)
         return output
+
+
+
+
