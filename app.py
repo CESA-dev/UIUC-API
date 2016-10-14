@@ -5,7 +5,7 @@ from werkzeug.contrib.cache import SimpleCache
 from resources.dining import Dining, DiningInformation, DiningSearch, DiningToday
 from resources.weather import Weather
 from resources.wifi import Wifi, WifiNearMe
-from resources.laundry import Laundry, LaundryID
+from resources.laundry import Laundry, LaundryID, LaundryName
 from resources.main import Main
 from resources.free_food import FreeFood
 from resources.ews_status import EWSStatus
@@ -59,6 +59,8 @@ api.add_resource(Weather, '/weather')
 
 api.add_resource(Laundry, '/laundry')
 api.add_resource(LaundryID, '/laundry/<string:id>')
+api.add_resource(LaundryName, '/laundry/<string:name>')
+
 
 api.add_resource(FacultyDirectory, '/directory/faculty')
 

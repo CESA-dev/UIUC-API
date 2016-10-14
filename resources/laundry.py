@@ -26,6 +26,16 @@ class LaundryID(Resource):
             output = str(e)
         return output
 
+class LaundryName(Resource):
+    def get(self, name):
+        r = redis.StrictRedis(host='localhost', port=6379, db=0)
+        #print str(json.load(response))
+        output =""
+        try: 
+            output = json.loads(r.get(name))
+        except Exception as e:
+            output = str(e)
+        return output
 
 
 
