@@ -36,6 +36,14 @@ def laundry_update():
     r.set("app.tasks.laundry.rooms", json.dumps(room_names))
 
 
+def laundry_stats_reset():
+    r = redis.StrictRedis(host='localhost', port=6379, db=0)
+    room_names = json.loads(r.get("app.tasks.laundry.rooms"))
+
+    for room in room_names:
+        r.delete("app.tasks.laundry.stats.{}".format(room))
+
+
 def laundry_stats_update():
     r = redis.StrictRedis(host='localhost', port=6379, db=0)
     room_names = json.loads(r.get("app.tasks.laundry.rooms"))
@@ -79,7 +87,6 @@ def laundry_stats_update():
                     machine_in_use += 1
                 machine_stat['daily_usage'] = machine_stat['total_usage'] / max(86400, machine_stat['total_powered']) * 86400
 
-            last_date = datetime.datetime.fromtimestamp(last_timestamp)
             current_date = datetime.datetime.fromtimestamp(current_timestamp)
             hour = current_date.hour
 
