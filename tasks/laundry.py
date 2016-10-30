@@ -21,6 +21,8 @@ def laundry_update():
 
     data = json.loads(st)
     length = len(data['location']['rooms'])
+
+    room_names = []
         
     id_str = ["" for x in range(length)]
     machine = [ dict() for x in range(length)]
@@ -40,6 +42,8 @@ def laundry_update():
     i = 0
     t = time.time()
     while(i < length):                              
+        room_names.append(name[i])
+
         temp = {}
         temp['machine'] = machine[i]
         temp['id'] = id_str[i]
@@ -56,4 +60,4 @@ def laundry_update():
         r.set(name[i], somelist[i])
         i = i + 1
 
-
+    r.set("app.tasks.laundry.rooms", json.dumps(room_names))
