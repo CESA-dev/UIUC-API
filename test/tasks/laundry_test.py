@@ -36,6 +36,11 @@ class TestLaundry(unittest.TestCase):
                 self.assertTrue(0 <= room_stat['total_usage_by_hour'][hour])
                 self.assertTrue(0 <= room_stat['average_usage_by_hour'][hour] <= len(machine_stats))
 
+            for day in range(7):
+                self.assertTrue(0 <= room_stat['total_open_by_day'][day])
+                self.assertTrue(0 <= room_stat['total_usage_by_day'][day])
+                self.assertTrue(0 <= room_stat['average_usage_by_day'][day] <= len(machine_stats))
+
             for machine_id in machine_stats:
                 machine_stat = machine_stats[machine_id]
 

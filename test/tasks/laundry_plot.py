@@ -12,10 +12,16 @@ def draw(room_names):
         room_stats = json.loads(r.get("app.tasks.laundry.stats.{}".format(room)))
 
         plt.figure()
-        plt.title('Room Statistics for {}'.format(room))
+        plt.title('Room Statistics By Hour for {}'.format(room))
         hours = np.arange(24)
         plt.bar(hours, room_stats['room_stat']['average_usage_by_hour'], bar_width)
-        plt.xticks(hours + bar_width / 2, hours + 1)
+        plt.xticks(hours + bar_width / 2, hours)
+
+        plt.figure()
+        plt.title('Room Statistics By Weekday for {}'.format(room))
+        days = np.arange(7)
+        plt.bar(days, room_stats['room_stat']['average_usage_by_day'], bar_width)
+        plt.xticks(days + bar_width / 2, days + 1)
 
         plt.figure()
         plt.title('Machine Statistics for {}'.format(room))
