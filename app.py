@@ -3,7 +3,7 @@ from flask_restful import Api, Resource
 from werkzeug.contrib.cache import SimpleCache
 
 from resources.dining import Dining, DiningInformation, DiningSearch, DiningToday
-from resources.weather import Weather
+# from resources.weather import Weather
 from resources.wifi import Wifi, WifiNearMe
 from resources.laundry import Laundry, LaundryID, LaundryName
 from resources.main import Main
@@ -55,7 +55,7 @@ api.add_resource(DiningInformation, '/dining/information')
 api.add_resource(Wifi, '/wifi')
 #api.add_resource(WifiNearMe, '/wifi/<string:latitude>/<string:longitude>')
 
-api.add_resource(Weather, '/weather')
+# api.add_resource(Weather, '/weather')
 
 api.add_resource(Laundry, '/laundry')
 api.add_resource(LaundryID, '/laundry/<string:id>')
