@@ -6,6 +6,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from pyvirtualdisplay import Display
 
 
 from cStringIO import StringIO
@@ -35,6 +36,8 @@ def dining_update():
 
 
 def dining_fetch_json(date):
+    display = Display(visible=0, size=(800, 600))
+    display.start()
     retval = json.loads('[]')
     
     driver = webdriver.Chrome()
@@ -72,11 +75,13 @@ def dining_fetch_json(date):
                 # print(period)
                 a['period'] = period
                 txt = meal_period_menu.text
-                foods = meal_period_menu.text.split("\n")[1:]
+                print(txt)
+		foods = meal_period_menu.text.split("\n")[1:]
                 food_classes = meal_period_menu.find_elements_by_tag_name('strong')
                 i = 0
                 a['food'] = []
                 for food in foods:
+		    print(food_classes[i])
                     food_json = json.loads('{}')
                     food_json['food_class'] = food_classes[i].text
                     food_json['details'] = [x.strip() for x in food.split(food_classes[i].text)[1].split(',')]
@@ -86,6 +91,10 @@ def dining_fetch_json(date):
                 u['meal_period'].append(a)
             dat['dining_service_unit'].append(u)
         retval.append(dat)
+    
+    driver.close()
+    driver.quit()
+    display.stop()
     return retval
 
 
@@ -94,8 +103,6 @@ def dining_fetch_json(date):
 
 
         
-    driver.close()
-    driver.quit()
 
 
 
@@ -119,5 +126,6 @@ def dining_format(text):
             
 
 
-        
+if __name__ == '__main__':
+    dining_fetch_json('02/25/2017')    
 
