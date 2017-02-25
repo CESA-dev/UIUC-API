@@ -25,14 +25,14 @@ from tasks.celery import app
 def dining_update():
     dt = datetime.today()
     a = timedelta(days=1)
-    r = redis.StrictRedis(host='localhost', por=6379, db=0)
+    r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
     for i in range(0,7):
         dt_str = dt.strftime("%m/%d/%Y")
         all_dining = dining_fetch_json(dt_str)
         for dining in all_dining:
-            key = 'app.tasks.dining.{}.{}'.format(dt_str, dining[name])
-            r.set(key, json.dumps[dining])
+            key = 'app.tasks.dining.{}.{}'.format(dt_str, dining['name'])
+            r.set(key, json.dumps(dining))
 
 
 def dining_fetch_json(date):
@@ -47,7 +47,7 @@ def dining_fetch_json(date):
     halls = select.text.split('\n')
     for hall in halls:
         dat = json.loads('{}')
-        dat['name'] = hall
+        dat['name'] = hall.strip()
         elem = driver.find_element_by_name("pagebody_0$txtServingDate")
         elem.clear()
         elem.send_keys(date)
