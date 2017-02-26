@@ -75,13 +75,13 @@ def dining_fetch_json(date):
                 # print(period)
                 a['period'] = period
                 txt = meal_period_menu.text
-                print(txt)
+                # print(txt)
 		foods = meal_period_menu.text.split("\n")[1:]
                 food_classes = meal_period_menu.find_elements_by_tag_name('strong')
                 i = 0
                 a['food'] = []
                 for food in foods:
-		    print(food_classes[i])
+		    # print(food_classes[i])
                     food_json = json.loads('{}')
                     food_json['food_class'] = food_classes[i].text
                     food_json['details'] = [x.strip() for x in food.split(food_classes[i].text)[1].split(',')]

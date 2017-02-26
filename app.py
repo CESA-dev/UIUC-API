@@ -2,7 +2,7 @@ from flask import Flask
 from flask_restful import Api, Resource
 from werkzeug.contrib.cache import SimpleCache
 
-from resources.dining import Dining, DiningInformation, DiningSearch, DiningToday
+from resources.dining import Dining
 # from resources.weather import Weather
 from resources.wifi import Wifi, WifiNearMe
 from resources.laundry import Laundry, LaundryID, LaundryName
@@ -46,10 +46,7 @@ cache = SimpleCache(app)
 api.add_resource(Main, '/')
 
 '''Dining'''
-api.add_resource(DiningToday, '/dining/<string:hall>')
-api.add_resource(Dining, '/dining/<string:hall>/<string:dateFrom>/<string:dateTo>')
-api.add_resource(DiningSearch, '/dining/search/<string:query>')
-api.add_resource(DiningInformation, '/dining/information')
+api.add_resource(Dining, '/dining/<string:hall>/<string:date_str>')
 
 '''Wifi'''
 api.add_resource(Wifi, '/wifi')

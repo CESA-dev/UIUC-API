@@ -7,6 +7,13 @@ CELERYBEAT_SCHEDULE = {
         'task': 'laundry.update',
         'schedule': timedelta(seconds=30),
     },
+
+    'add-every-day': {
+        'task': 'dining.update',
+        'schedule': timedelta(days=1),
+       
+    },
+
 }
 
 CELERY_TIMEZONE = 'UTC'
